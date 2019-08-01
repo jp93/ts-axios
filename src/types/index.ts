@@ -1,4 +1,6 @@
 import { promises } from "fs";
+import { config } from "shelljs";
+import { request } from "http";
 
 export type Method = 'get' | 'GET'
   | 'deletet' | 'Delete'
@@ -12,16 +14,25 @@ export interface AxiosRequestConfig {
   method?: Method,
   data?: any,
   params?: any,
-  headers?:any,
-  reponseType?: XMLHttpRequestResponseType
+  headers?: any,
+  reponseType?: XMLHttpRequestResponseType,
+  timeout?: number
 }
-export interface AxiosResponse{
-  data:any,
-  status:number,
-  statusText:string,
-  headers:any,
-  config:AxiosRequestConfig,
-  request:any
+export interface AxiosResponse {
+  data: any,
+  status: number,
+  statusText: string,
+  headers: any,
+  config: AxiosRequestConfig,
+  request: any
 
 }
-export interface AxiosPromise extends Promise<AxiosResponse> {}
+export interface AxiosPromise extends Promise<AxiosResponse> { }
+export interface AxiosError extends Error {
+  isAxiosError: boolean,
+  config: AxiosRequestConfig,
+  code?: string | null,
+  request?: any,
+  reponse?: AxiosResponse
+
+}
