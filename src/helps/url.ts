@@ -19,7 +19,7 @@ export function buildURL(url: string, params?: any): string {
     if (val === null || val === 'undefined') {
       return
     }
-    const values = []
+    let values = []
     if (Array.isArray(val)) {
       values = val
       key += '[]'
@@ -43,5 +43,6 @@ export function buildURL(url: string, params?: any): string {
     }
     url += (url.indexOf('?') === -1 ? '?' : '& ') + serializedParams
   }
+  return url
 
 } 
